@@ -6,6 +6,8 @@ class Game {
     this.gameText = document.getElementById("game-container");
     this.statsText = document.getElementById("stats");
     this.scorePosition = document.getElementById("score");
+    this.scoreText = document.getElementById("score-text");
+    this.storedHighScore = localStorage.getItem("highScore") || 0;
     this.highScorePosition = document.getElementById("high-score");
     this.initScore = document.getElementById("init-score");
     this.initHighScore = document.getElementById("init-high-score");
@@ -27,15 +29,25 @@ class Game {
 
   start() {
     // console.log(`gamestarrrtt!!!`);
+
+    const renderHighScoreInGame = this.storedHighScore
+      ? this.storedHighScore
+      : 0;
+
+    if (renderHighScoreInGame) {
+      this.highScorePosition.innerText = renderHighScoreInGame;
+    }
+
     this.gameScreen.style.width = `${this.width}px`;
     this.gameScreen.style.height = `${this.height}px`;
     this.startScreen.style.display = "none";
     this.gameScreen.style.display = "block";
     this.gameEndScreen.style.display = "none";
-    this.scorePosition.style.position = "absolute";
+    // this.scorePosition.style.position = "absolute";
     this.statsText.style.display = "none";
     this.score = 0;
     this.scorePosition.innerText = `${this.score}`;
+    this.initScore.innerText = ` ${this.score}`;
     this.gameIsOver = false;
 
     this.gameIntervalId = setInterval(() => {
@@ -107,7 +119,10 @@ class Game {
   }
 
   endGame() {
-    if (this.gameIsOver) return; // Ensure endGame is called only once
+    if (this.gameIsOver) {
+      return;
+    }
+    // Ensure endGame is called only once
 
     console.log("game over");
     this.gameIsOver = true;
@@ -139,17 +154,23 @@ class Game {
     this.gameScreen.style.display = "none";
     this.gameEndScreen.style.display = "block";
     this.statsText.style.display = "block";
+    this.scoreText.style.display = "block";
   }
 
   updateScore() {
     this.score += 1;
     this.scorePosition.innerText = `${this.score}`;
-    this.initScore.innerText = `${this.score}`;
-    if (this.score > this.highScore) {
-      this.highScore = this.score;
-      localStorage.setItem('highScore', this.highScore);
-      this.initHighScore.innerText = `${this.highScore}`;
-      this.highScorePosition.innerText = `${this.highScore}`;
+    this.initScore.innerText = ` ${this.score}`;
+
+    // if (this.score > this.highScore) {
+    //   this.highScore = this.score;
+    //   localStorage.setItem('highScore', this.highScore);
+    // }
+
+    if (this.score > this.storedHighScore) {
+      localStorage.setItem("highScore", this.score);
+      this.highScorePosition.innerText = this.score;
+      this.initHighScore.innerText = this.score;
     }
   }
 

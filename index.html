@@ -11,12 +11,18 @@
     <main>
       <!-- #game-intro is initially shown on the game start screen -->
       <div id="game-intro">
-        <img src="#" alt="" class="logo-img" />
+        <div id="logo">
+          <img src="images/L.gif" alt="L" id="L" />
+          <img src="images/I.gif" alt="i" id="I" />
+          <img src="images/N.gif" alt="n" id="N" />
+          <img src="images/K.gif" alt="k" id="K" />
+          
+        </div>
         <br />
-        <button id="start-button">Start</button>
+        <button id="start-button">START</button>
         <p>Remove the bombs with the link between two players</p>
         <p>
-          If you don't remove the bomb in time it will detonate and the game
+          If you don't remove a bomb in time it will detonate and the game
           will end
         </p>
         <p>WASD for Player 1</p>
@@ -26,7 +32,7 @@
 
       <div id="game-container">
         <div id="stats">
-          <p>Score: <span id="init-score">0</span></p>
+          <p id="score-text">Score: <span id="init-score">0</span></p>
           <p>High score: <span id="init-high-score">0</span></p>
         </div>
         <!-- #game-screen is initially hidden using CSS style display: none -->

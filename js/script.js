@@ -1,6 +1,21 @@
 window.onload = function () {
   const startButton = document.getElementById("start-button");
   const restartButton = document.getElementById("restart-button");
+
+  // ======
+  const storedHighScore = localStorage.getItem("highScore");
+  const renderHighScoreUI = storedHighScore ? storedHighScore : 0;
+  const initialHighScoreUI = document.getElementById("init-high-score");
+  const score = document.getElementById("score-text");
+  score.style.display = "none";
+
+  if (renderHighScoreUI) {
+    initialHighScoreUI.innerText = renderHighScoreUI;
+  } else {
+    localStorage.setItem("highScore", 0);
+  }
+  // ======
+
   let game;
   startButton.onclick = () => {
     startGame();

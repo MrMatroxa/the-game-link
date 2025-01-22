@@ -1,17 +1,74 @@
 body {
   padding: 0;
   text-align: center;
+  display: flex; /* Add Flexbox */
+  justify-content: center; /* Center horizontally */
+  padding-top: 20px;
+  height: 100vh; /* Full viewport height */
+  margin: 0; /* Remove default margin */
+}
+
+#logo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#logo img {
+  width: auto; /* Set specific width */
+  height: 80px; /* Maintain aspect ratio */
+  animation: MoveUpDown 5s linear infinite;
+}
+
+@keyframes MoveUpDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
 }
 
 #game-intro {
-  padding: 20px 0px;
+  padding: 50px 0px;
+  width: 60%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  height: 650px;
+  background-image: url(images/space.jpg);
+  animation: slide 5s linear infinite;
+}
+
+#game-intro,
+#stats,
+#game-end {
+  margin-top: 60px;
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+}
+
+#game-end {
+  padding-top: 100px;
+}
+
+#stats {
+  position: absolute;
+  bottom: 300px;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
 }
 
 #game-container {
   display: flex;
   /* width: 100vw; */
   /* height: 100vh; */
-  padding: 20px 0px;
+  /* padding: 20px 0px; */
   justify-content: center;
 }
 
@@ -74,13 +131,14 @@ body {
 
 body button {
   font-size: 30px;
-  background-color: #870007;
+  background-color: #6d58e2;
   color: #fff;
-  padding: 20px 40px;
+  padding: 15px 60px;
   border: 0;
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .animation {
@@ -135,4 +193,12 @@ body button {
 .player,
 .player2 {
   transition: transform 0.5s ease-in;
+}
+
+#start-button {
+  position: absolute;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
