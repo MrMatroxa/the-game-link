@@ -11,7 +11,7 @@ class Player {
     this.directionX = 0;
     this.directionY = 0;
     this.element = document.createElement("img");
-    this.element.src = "/images/Player1.png";
+    this.element.src = "images/Player1.png";
     this.element.style.position = "absolute";
     this.element.style.width = `${this.width}px`; // Apply width
     this.element.style.height = `${this.height}px`; // Apply height
@@ -81,6 +81,6 @@ class Player {
 class Player2 extends Player {
   constructor(gameScreen, left, top, width, height) {
     super(gameScreen, left, top, width, height);
-    this.element.src = "/images/Player2.png";
+    this.element.src = "images/Player2.png";
   }
 }

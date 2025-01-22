@@ -17,7 +17,7 @@ class Enemy {
     // Create loading element
     this.loadingElement = document.createElement("img");
     this.loadingElement.classList.add("animation");
-    this.loadingElement.src = "/images/loading-enemy.png";
+    this.loadingElement.src = "images/loading-enemy.png";
     this.loadingElement.style.position = "absolute";
     this.loadingElement.style.width = `${this.width}px`; // Apply width
     this.loadingElement.style.height = `${this.height}px`; // Apply height
@@ -37,7 +37,7 @@ class Enemy {
 
     // Create actual enemy element
     this.element = document.createElement("img");
-    this.element.src = "/images/enemy.png";
+    this.element.src = "images/enemy.png";
     this.element.style.position = "absolute";
     this.element.style.width = `${this.width}px`; // Apply width
     this.element.style.height = `${this.height}px`; // Apply height

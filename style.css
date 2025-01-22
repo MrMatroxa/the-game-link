@@ -27,7 +27,6 @@ body {
   background-size: cover;
   background-position: center;
   animation: slide 5s linear infinite;
-  border: 12px solid red;
 }
 
 .wrapper-child {
@@ -41,7 +40,7 @@ body {
   text-align: left;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  color: rgb(47, 176, 236);
+  color: blueviolet;
 }
 
 @keyframes slide {
