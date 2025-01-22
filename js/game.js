@@ -4,6 +4,11 @@ class Game {
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end");
     this.gameText = document.getElementById("game-container");
+    this.statsText = document.getElementById("stats");
+    this.scorePosition = document.getElementById("score");
+    this.highScorePosition = document.getElementById("high-score");
+    this.initScore = document.getElementById("init-score");
+    this.initHighScore = document.getElementById("init-high-score");
     this.player = new Player(this.gameScreen, 350, 300, 30, 30);
     this.player2 = new Player2(this.gameScreen, 250, 300, 30, 30);
     this.line = new Line(this.gameScreen, 200, 3, 3); // 10 segments, each 3px wide and 3px high
@@ -11,22 +16,28 @@ class Game {
     this.width = 600;
     this.enemies = [];
     this.score = 0;
+    this.highScore = 0;
     this.gameIsOver = false;
     this.gameIntervalId;
     this.gameLoopFrequency = Math.round(1000 / 60);
-    this.scorePosition = document.getElementById("score");
-
     this.enemySpawnInterval = 4000; // Initial interval for spawning enemies (in milliseconds)
     this.enemySpawnDecreaseRate = 500; // Decrease rate for the interval (in milliseconds)
     this.minEnemySpawnInterval = 1000; // Minimum interval for spawning enemies (in milliseconds)
   }
 
   start() {
-    console.log(`gamestarrrtt!!!`);
+    // console.log(`gamestarrrtt!!!`);
     this.gameScreen.style.width = `${this.width}px`;
     this.gameScreen.style.height = `${this.height}px`;
     this.startScreen.style.display = "none";
     this.gameScreen.style.display = "block";
+    this.gameEndScreen.style.display = "none";
+    this.scorePosition.style.position = "absolute";
+    this.statsText.style.display = "none";
+    this.score = 0;
+    this.scorePosition.innerText = `${this.score}`;
+    this.gameIsOver = false;
+
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
@@ -38,13 +49,13 @@ class Game {
       clearInterval(this.gameIntervalId);
       clearInterval(this.enemySpawnIntervalId);
     }
-    console.log("in the game looooooooooop!");
+    // console.log("in the game looooooooooop!");
     this.update();
   }
 
   update() {
     // Update game state (e.g., player position, enemy positions)
-    console.log("updates yay!");
+    // console.log("updates yay!");
     this.player.move();
     this.player2.move();
     this.line.update(this.player, this.player2);
@@ -81,8 +92,16 @@ class Game {
 
   spawnEnemy() {
     if (this.gameIsOver) return;
-    
+
     const newEnemy = new Enemy(this.gameScreen, this.width, this.height, this);
+
+    //if the game is not over spawn new enemies with a delay because of the loading animation
+    setTimeout(() => {
+      if (!this.gameIsOver) {
+        newEnemy.spawnEnemy();
+      }
+    }, 2000);
+
     this.enemies.push(newEnemy);
     console.log("New enemy added:", newEnemy);
   }
@@ -105,6 +124,11 @@ class Game {
         enemy.element.remove();
       }
     });
+    this.enemies.forEach((enemy) => {
+      if (enemy && enemy.loadingElement) {
+        enemy.loadingElement.remove();
+      }
+    });
     this.line.segments.forEach((segment) => {
       if (segment && segment.element) {
         segment.element.remove();
@@ -114,11 +138,19 @@ class Game {
     // Hide game screen and show end screen
     this.gameScreen.style.display = "none";
     this.gameEndScreen.style.display = "block";
+    this.statsText.style.display = "block";
   }
 
   updateScore() {
     this.score += 1;
     this.scorePosition.innerText = `${this.score}`;
+    this.initScore.innerText = `${this.score}`;
+    if (this.score > this.highScore) {
+      this.highScore = this.score;
+      localStorage.setItem('highScore', this.highScore);
+      this.initHighScore.innerText = `${this.highScore}`;
+      this.highScorePosition.innerText = `${this.highScore}`;
+    }
   }
 
   destroyEnemy() {

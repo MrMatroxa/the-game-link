@@ -26,9 +26,9 @@ class Enemy {
     this.gameScreen.appendChild(this.loadingElement);
 
     // Simulate loading time before spawning the actual enemy
-    setTimeout(() => {
-      this.spawnEnemy();
-    }, 2000); // Adjust the loading time as needed
+    // setTimeout(() => {
+    //   this.spawnEnemy();
+    // }, 2000); // Adjust the loading time as needed
   }
 
   spawnEnemy() {
@@ -72,7 +72,7 @@ class Enemy {
           setTimeout(() => {
             this.element.remove();
             this.exploded = true; // Set exploded flag
-          }, 500); 
+          }, 500);
         }, timeout * 3);
       }
     }, timeout); // Adjust the pulsate interval
