@@ -23,7 +23,7 @@ body {
   padding: 20px 0px;
   overflow: hidden;
   position: relative;
-  background-image: url(./space.jpg);
+  background-image: url(images/space.jpg);
   background-size: cover;
   background-position: center;
   animation: slide 5s linear infinite;
