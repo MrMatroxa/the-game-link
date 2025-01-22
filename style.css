@@ -23,14 +23,13 @@ body {
   padding: 20px 0px;
   overflow: hidden;
   position: relative;
-  background-image: url(/images/space.jpg);
+  background-image: url(/space.jpg);
   background-size: cover;
   background-position: center;
   animation: slide 5s linear infinite;
 }
 
 .wrapper-child {
-  
   position: absolute;
   top: 0;
   height: 100%;
@@ -39,7 +38,7 @@ body {
   justify-content: space-between;
   padding-left: 20px;
   text-align: left;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   color: rgb(47, 176, 236);
 }
