@@ -1,13 +1,14 @@
 window.onload = function () {
   const startButton = document.getElementById("start-button");
   const restartButton = document.getElementById("restart-button");
-
+  const menuButton = document.getElementById("menu-button");
+  
   // ======
   const storedHighScore = localStorage.getItem("highScore");
   const renderHighScoreUI = storedHighScore ? storedHighScore : 0;
   const initialHighScoreUI = document.getElementById("init-high-score");
-  const score = document.getElementById("score-text");
-  score.style.display = "none";
+  // const score = document.getElementById("score-text");
+  // score.style.display = "none";
 
   if (renderHighScoreUI) {
     initialHighScoreUI.innerText = renderHighScoreUI;
@@ -16,6 +17,7 @@ window.onload = function () {
   }
   // ======
 
+  
   let game;
   startButton.onclick = () => {
     startGame();
@@ -24,13 +26,16 @@ window.onload = function () {
     startGame();
     // location.reload();
   };
-
+  menuButton.onclick = () => {
+    location.reload();
+  }
+  
   function startGame() {
     console.log("start game");
     game = new Game();
     game.start();
   }
-
+  
   const possibleKeystrokes = new Set([
     "ArrowLeft",
     "ArrowUp",

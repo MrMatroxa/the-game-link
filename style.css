@@ -16,16 +16,47 @@ body {
 #logo img {
   width: auto; /* Set specific width */
   height: 80px; /* Maintain aspect ratio */
-  animation: MoveUpDown 5s linear infinite;
 }
 
-@keyframes MoveUpDown {
+#L {
+  animation: MoveUpDown1 5s linear infinite;
+}
+
+#I {
+  animation: MoveUpDown1 5s linear infinite;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+}
+
+#N {
+  animation: MoveUpDown1 5s linear infinite;
+  animation-delay: 2s;
+  animation-fill-mode: both;
+}
+
+#K {
+  animation: MoveUpDown1 5s linear infinite;
+  animation-delay: 3s;
+  animation-fill-mode: both;
+}
+
+@keyframes MoveUpDown1 {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(-5px);
   }
   50% {
-    transform: translateY(10px);
+    transform: translateY(5px);
+  }
+}
+
+@keyframes MoveUpDown2 {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(3px);
   }
 }
 
@@ -40,8 +71,20 @@ main {
   align-items: center;
   width: 600px;
   height: 650px;
-  background-image: url(images/space.jpg);
-  animation: slide 5s linear infinite;
+  background-image: url(images/space2.jpg);
+  background-repeat: repeat-y;
+  background-size: auto 800px; 
+  animation: slide 10s linear infinite;
+}
+
+
+@keyframes slide {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 -800px;
+  }
 }
 
 #game-intro,
@@ -66,9 +109,6 @@ main {
 
 #game-container {
   display: flex;
-  /* width: 100vw; */
-  /* height: 100vh; */
-  /* padding: 20px 0px; */
   justify-content: center;
 }
 
@@ -80,10 +120,12 @@ main {
   padding: 20px 0px;
   overflow: hidden;
   position: relative;
-  background-image: url(images/space.jpg);
+  background-image: url(images/space2.jpg);
   background-size: cover;
   background-position: center;
-  animation: slide 5s linear infinite;
+  background-repeat: repeat-y;
+  background-size: auto 800px; 
+  animation: slide 10s linear infinite;
 }
 
 .wrapper-child {
@@ -100,7 +142,7 @@ main {
   color: blueviolet;
 }
 
-@keyframes slide {
+/* @keyframes slide {
   0% {
     background-position: 0 -1000px;
   }
@@ -110,7 +152,8 @@ main {
   100% {
     background-position: 0 50px;
   }
-}
+} */
+
 
 #game-end {
   display: none;
@@ -195,10 +238,25 @@ body button {
   transition: transform 0.5s ease-in;
 }
 
+.player-img {
+  width: 10%;
+  height: auto;
+  vertical-align: middle;
+  animation: MoveUpDown2 5s linear infinite;
+}
+
 #start-button {
-  position: absolute;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  font-weight: 600;
+}
+
+#restart-button {
+  font-weight: 600;
+}
+
+#menu-button {
+  background-color: #272532;
+}
+
+#score-text {
+  display: none;
 }
