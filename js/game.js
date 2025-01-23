@@ -3,6 +3,10 @@ class Game {
     this.startScreen = document.getElementById("game-intro");
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end");
+    // music on
+    this.musicOnIcon = document.getElementById("music-on");
+    // music off
+    this.musicOffIcon = document.getElementById("music-off");
     this.startMusic = document.getElementById("start-music");
     this.gameMusic = document.getElementById("game-music");
     this.endMusic = document.getElementById("end-music");
@@ -55,7 +59,11 @@ class Game {
     this.scorePosition.innerText = `${this.score}`;
     this.initScore.innerText = ` ${this.score}`;
     this.gameIsOver = false;
-
+    if (this.musicOnIcon.style.display === "block") {
+      this.gameMusic.play();
+      this.startMusic.pause();
+      this.endMusic.pause();
+    }
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
@@ -135,10 +143,6 @@ class Game {
     // this.startMusic.pause();
 
     this.gameIsOver = true;
-    this.enemies.forEach((enemy) => {
-      enemy.stopExplosionAudio();
-    });
-
 
     // Remove all game elements and check if they exist before removing
     if (this.player && this.player.element) {
@@ -155,6 +159,7 @@ class Game {
     this.enemies.forEach((enemy) => {
       if (enemy && enemy.loadingElement) {
         enemy.loadingElement.remove();
+        enemy.stopExplosionAudio();
       }
     });
     this.line.segments.forEach((segment) => {
@@ -168,6 +173,11 @@ class Game {
     this.gameEndScreen.style.display = "block";
     this.statsText.style.display = "block";
     this.scoreText.style.display = "block";
+    if (this.musicOnIcon.style.display === "block") {
+      this.gameMusic.pause();
+      this.startMusic.pause();
+      this.endMusic.play();
+    }
   }
 
   updateScore() {
@@ -201,6 +211,9 @@ class Game {
         this.checkPlayerEnemyCollision(enemy); // Pass the enemy object
       }
     }
+    this.enemies.forEach((enemy) => {
+      enemy.stopExplosionAudio();
+    });
   }
 
   checkPlayerEnemyCollision(enemy) {
@@ -210,7 +223,7 @@ class Game {
         this.endGame();
       }, 500); // Match the duration of the explode animation
       const audio = new Audio("audio/player-die.mp3");
-        audio.play();
+      audio.play();
     }
   }
 
@@ -237,7 +250,7 @@ class Game {
         this.endGame();
       }, 500); // Match the duration of the explode animation
       const audio = new Audio("audio/player-die.mp3");
-        audio.play();
+      audio.play();
     }
   }
 

@@ -12,12 +12,12 @@ const endMusic = document.getElementById("end-music");
 const musicOnIcon = document.getElementById("music-on");
 // music off
 const musicOffIcon = document.getElementById("music-off");
-let isMusicOn = false;
 
 function playMusic(music) {
   music.currentTime = 0;
   music.play();
 }
+
 function stopAllMusic() {
   console.log("stop all music");
   stopMusic(startMusic);
@@ -29,36 +29,38 @@ function stopMusic(music) {
   music.pause();
   music.currentTime = 0;
 }
-
-musicOffIcon.addEventListener("click", function () {
-  musicOnIcon.style.display = "block";
-  musicOffIcon.style.display = "none";
-  isMusicOn = true;
-  playCurrentMusic();
-});
+let isMusicOn = false;
 
 musicOnIcon.addEventListener("click", function () {
   musicOnIcon.style.display = "none";
   musicOffIcon.style.display = "block";
   isMusicOn = false;
+  console.log(`the music is off`, isMusicOn);
   stopAllMusic();
 });
 
-if (isMusicOn) {
+musicOffIcon.addEventListener("click", function () {
+  musicOnIcon.style.display = "block";
+  musicOffIcon.style.display = "none";
+  isMusicOn = true;
+  console.log(`the music is on`, isMusicOn);
   playCurrentMusic();
-}
+});
 
 function playCurrentMusic() {
   if (window.getComputedStyle(startScreen).display === "block") {
+    console.log("play music");
     playMusic(startMusic);
   }
   if (window.getComputedStyle(gameScreen).display === "block") {
+    console.log("play game music");
     playMusic(gameMusic);
   }
   if (window.getComputedStyle(gameEndScreen).display === "block") {
     playMusic(endMusic);
   }
 }
+
 window.onload = function () {
   startScreen.style.display === "block";
 
@@ -95,7 +97,14 @@ window.onload = function () {
   };
 
   menuButton.onclick = () => {
-    location.reload();
+    gameEndScreen.style.display = "none";
+    startScreen.style.display = "block";
+    if (window.getComputedStyle(musicOnIcon).display === "block") {
+      stopAllMusic();
+      playMusic(startMusic);
+    } else {
+      stopAllMusic();
+    }
   };
 
   function startGame() {

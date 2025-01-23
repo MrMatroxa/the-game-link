@@ -6,6 +6,7 @@ class Enemy {
     this.height = 35;
     this.exploded = false;
     this.explosionAudio = new Audio("audio/explosion-timer.mp3");
+    this.enemyDied = false;
 
     // Get the dimensions of the game screen
     this.gameScreenWidth = gameScreenWidth;
@@ -49,6 +50,8 @@ class Enemy {
     this.updatePosition();
     this.pulsate();
     // this.pulsate2();
+    this.playExplosionAudio();
+    this.checkDead();
   }
 
   updatePosition() {
@@ -76,21 +79,23 @@ class Enemy {
           }, 500);
         }, timeout * 3);
       }
-      this.playExplosionAudio();
     }, timeout); // Adjust the pulsate interval
   }
 
   playExplosionAudio() {
-    setTimeout(() => {
-      this.explosionAudio.play();
-    }, 3000);
+    this.explosionAudio.play();
   }
 
   stopExplosionAudio() {
-    setTimeout(() => {
-      this.explosionAudio.pause();
-      this.explosionAudio.currentTime = 0;
-    }, 490);
+    this.explosionAudio.pause();
+    this.explosionAudio.currentTime = 0;
+  }
+
+  checkDead() {
+    if (this.enemyDied) {
+      console.log("Enemy died");
+      this.stopExplosionAudio();
+    }
   }
 
   // endGameExplode() {
