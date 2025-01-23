@@ -16,17 +16,22 @@
           <img src="images/I.gif" alt="i" id="I" />
           <img src="images/N.gif" alt="n" id="N" />
           <img src="images/K.gif" alt="k" id="K" />
-          
         </div>
         <br />
-        
+
         <p>Defuse the bombs with the link between two players</p>
         <p>
-          If you don't remove a bomb in time it will detonate and the game
-          will end
+          If you don't remove a bomb in time it will detonate and the game will
+          end
         </p>
-        <p>WASD for <img src="images/Player2.png" alt="Player1" class="player-img"></p>
-        <p>ARROW KEYS for <img src="images/Player1.png" alt="Player2" class="player-img"></p>
+        <p>
+          WASD for
+          <img src="images/Player2.png" alt="Player1" class="player-img" />
+        </p>
+        <p>
+          ARROW KEYS for
+          <img src="images/Player1.png" alt="Player2" class="player-img" />
+        </p>
 
         <button id="start-button">START</button>
       </div>
@@ -53,13 +58,32 @@
       <!-- #game-end is initially hidden using CSS style display: none -->
       <div id="game-end">
         <img src="#" alt="" class="logo-img" />
-        <h1>Game Over</h1>
+        <h1>Pwned!</h1>
         <br />
         <button id="restart-button">Restart</button>
         <button id="menu-button">Return to Menu</button>
       </div>
-    </main>
 
+      <div id="music-parent">
+        <img
+          src="images/music-on.png"
+          alt="music on"
+          class="music"
+          id="music-on"
+          style="display: none"
+        />
+        <img
+          style="display: block"
+          src="images/music-off.png"
+          alt="music off"
+          class="music"
+          id="music-off"
+        />
+      </div>
+    </main>
+    <audio id="start-music" src="audio/menu.mp3" loop></audio>
+    <audio id="game-music" src="audio/game-music.mp3" loop></audio>
+    <audio id="end-music" src="audio/pwned.mp3" loop></audio>
     <script type="text/javascript" src="js/game.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/players.js"></script>

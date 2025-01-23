@@ -5,6 +5,7 @@ class Enemy {
     this.width = 35;
     this.height = 35;
     this.exploded = false;
+    this.explosionAudio = new Audio("audio/explosion-timer.mp3");
 
     // Get the dimensions of the game screen
     this.gameScreenWidth = gameScreenWidth;
@@ -75,7 +76,21 @@ class Enemy {
           }, 500);
         }, timeout * 3);
       }
+      this.playExplosionAudio();
     }, timeout); // Adjust the pulsate interval
+  }
+
+  playExplosionAudio() {
+    setTimeout(() => {
+      this.explosionAudio.play();
+    }, 3000);
+  }
+
+  stopExplosionAudio() {
+    setTimeout(() => {
+      this.explosionAudio.pause();
+      this.explosionAudio.currentTime = 0;
+    }, 490);
   }
 
   // endGameExplode() {

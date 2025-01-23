@@ -3,6 +3,9 @@ class Game {
     this.startScreen = document.getElementById("game-intro");
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end");
+    this.startMusic = document.getElementById("start-music");
+    this.gameMusic = document.getElementById("game-music");
+    this.endMusic = document.getElementById("end-music");
     this.gameText = document.getElementById("game-container");
     this.statsText = document.getElementById("stats");
     this.scorePosition = document.getElementById("score");
@@ -30,6 +33,10 @@ class Game {
   start() {
     // console.log(`gamestarrrtt!!!`);
 
+    // this.startMusic.pause();
+    // this.endMusic.pause();
+    // this.gameMusic.play();
+
     const renderHighScoreInGame = this.storedHighScore
       ? this.storedHighScore
       : 0;
@@ -43,7 +50,6 @@ class Game {
     this.startScreen.style.display = "none";
     this.gameScreen.style.display = "block";
     this.gameEndScreen.style.display = "none";
-    // this.scorePosition.style.position = "absolute";
     this.statsText.style.display = "none";
     this.score = 0;
     this.scorePosition.innerText = `${this.score}`;
@@ -61,13 +67,11 @@ class Game {
       clearInterval(this.gameIntervalId);
       clearInterval(this.enemySpawnIntervalId);
     }
-    // console.log("in the game looooooooooop!");
     this.update();
   }
 
   update() {
     // Update game state (e.g., player position, enemy positions)
-    // console.log("updates yay!");
     this.player.move();
     this.player2.move();
     this.line.update(this.player, this.player2);
@@ -125,7 +129,16 @@ class Game {
     // Ensure endGame is called only once
 
     console.log("game over");
+
+    // this.endMusic.play();
+    // this.gameMusic.pause();
+    // this.startMusic.pause();
+
     this.gameIsOver = true;
+    this.enemies.forEach((enemy) => {
+      enemy.stopExplosionAudio();
+    });
+
 
     // Remove all game elements and check if they exist before removing
     if (this.player && this.player.element) {
@@ -182,6 +195,8 @@ class Game {
         this.enemies.splice(i, 1);
         i--; // Adjust the index after removal to avoid skipping the next enemy
         this.updateScore();
+        const audio = new Audio("audio/defuse.mp3");
+        audio.play();
       } else {
         this.checkPlayerEnemyCollision(enemy); // Pass the enemy object
       }
@@ -194,6 +209,8 @@ class Game {
       setTimeout(() => {
         this.endGame();
       }, 500); // Match the duration of the explode animation
+      const audio = new Audio("audio/player-die.mp3");
+        audio.play();
     }
   }
 
@@ -219,6 +236,8 @@ class Game {
       setTimeout(() => {
         this.endGame();
       }, 500); // Match the duration of the explode animation
+      const audio = new Audio("audio/player-die.mp3");
+        audio.play();
     }
   }
 

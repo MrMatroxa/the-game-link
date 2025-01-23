@@ -1,14 +1,81 @@
+const startScreen = document.getElementById("game-intro");
+const gameScreen = document.getElementById("game-screen");
+const gameEndScreen = document.getElementById("game-end");
+
+const startButton = document.getElementById("start-button");
+
+const startMusic = document.getElementById("start-music");
+const gameMusic = document.getElementById("game-music");
+const endMusic = document.getElementById("end-music");
+
+// music on
+const musicOnIcon = document.getElementById("music-on");
+// music off
+const musicOffIcon = document.getElementById("music-off");
+let isMusicOn = false;
+
+function playMusic(music) {
+  music.currentTime = 0;
+  music.play();
+}
+function stopAllMusic() {
+  console.log("stop all music");
+  stopMusic(startMusic);
+  stopMusic(gameMusic);
+  stopMusic(endMusic);
+}
+
+function stopMusic(music) {
+  music.pause();
+  music.currentTime = 0;
+}
+
+musicOffIcon.addEventListener("click", function () {
+  musicOnIcon.style.display = "block";
+  musicOffIcon.style.display = "none";
+  isMusicOn = true;
+  playCurrentMusic();
+});
+
+musicOnIcon.addEventListener("click", function () {
+  musicOnIcon.style.display = "none";
+  musicOffIcon.style.display = "block";
+  isMusicOn = false;
+  stopAllMusic();
+});
+
+if (isMusicOn) {
+  playCurrentMusic();
+}
+
+function playCurrentMusic() {
+  if (window.getComputedStyle(startScreen).display === "block") {
+    playMusic(startMusic);
+  }
+  if (window.getComputedStyle(gameScreen).display === "block") {
+    playMusic(gameMusic);
+  }
+  if (window.getComputedStyle(gameEndScreen).display === "block") {
+    playMusic(endMusic);
+  }
+}
 window.onload = function () {
-  const startButton = document.getElementById("start-button");
+  startScreen.style.display === "block";
+
+  gameScreen.style.display === "none";
+  gameEndScreen.style.display === "none";
+  // run
+  // playMusic(startMusic);
+  // // stop
+  // stopMusic(gameMusic);
+  // stopMusic(endMusic);
+
   const restartButton = document.getElementById("restart-button");
   const menuButton = document.getElementById("menu-button");
-  
-  // ======
+  // ====== High Score
   const storedHighScore = localStorage.getItem("highScore");
   const renderHighScoreUI = storedHighScore ? storedHighScore : 0;
   const initialHighScoreUI = document.getElementById("init-high-score");
-  // const score = document.getElementById("score-text");
-  // score.style.display = "none";
 
   if (renderHighScoreUI) {
     initialHighScoreUI.innerText = renderHighScoreUI;
@@ -17,7 +84,7 @@ window.onload = function () {
   }
   // ======
 
-  
+  // ========================
   let game;
   startButton.onclick = () => {
     startGame();
@@ -26,16 +93,17 @@ window.onload = function () {
     startGame();
     // location.reload();
   };
+
   menuButton.onclick = () => {
     location.reload();
-  }
-  
+  };
+
   function startGame() {
     console.log("start game");
     game = new Game();
     game.start();
   }
-  
+
   const possibleKeystrokes = new Set([
     "ArrowLeft",
     "ArrowUp",

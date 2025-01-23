@@ -1,11 +1,24 @@
+html {
+  width: 100%; /* Ensure the html takes the full width */
+  height: 100%; /* Ensure the html takes the full height */
+  position: relative;
+}
+
 body {
   padding: 0;
   text-align: center;
   display: flex; /* Add Flexbox */
   justify-content: center; /* Center horizontally */
   padding-top: 20px;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
+  width: 100vw;
   margin: 0; /* Remove default margin */
+  display: flex; /* Add Flexbox */
+  position: relative;
+}
+
+main {
+  position: relative;
 }
 
 #logo {
@@ -61,6 +74,7 @@ body {
 }
 
 #game-intro {
+  display: block;
   padding: 50px 0px;
   width: 60%;
 }
@@ -73,10 +87,9 @@ main {
   height: 650px;
   background-image: url(images/space2.jpg);
   background-repeat: repeat-y;
-  background-size: auto 800px; 
+  background-size: auto 800px;
   animation: slide 10s linear infinite;
 }
-
 
 @keyframes slide {
   0% {
@@ -104,7 +117,7 @@ main {
   bottom: 300px;
   width: 100%;
   text-align: center;
-  padding: 10px;
+  top: 450px;
 }
 
 #game-container {
@@ -124,7 +137,7 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: repeat-y;
-  background-size: auto 800px; 
+  background-size: auto 800px;
   animation: slide 10s linear infinite;
 }
 
@@ -139,7 +152,7 @@ main {
   text-align: left;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  color: blueviolet;
+  color: #8a2be2;
 }
 
 /* @keyframes slide {
@@ -153,7 +166,6 @@ main {
     background-position: 0 50px;
   }
 } */
-
 
 #game-end {
   display: none;
@@ -260,3 +272,22 @@ body button {
 #score-text {
   display: none;
 }
+
+#music-parent {
+  position: absolute;
+  width: 8%; /* Set a specific width for the container */
+  height: 8%; /* Set a specific height for the container */
+  top: 600px;
+  right: 20px;
+}
+
+#music-on,
+#music-off {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure the images take up the full width of the container */
+  height: auto; /* Ensure the images take up the full height of the container */
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
