@@ -7,9 +7,13 @@ class Game {
     this.musicOnIcon = document.getElementById("music-on");
     // music off
     this.musicOffIcon = document.getElementById("music-off");
+
+    /// music
     this.startMusic = document.getElementById("start-music");
     this.gameMusic = document.getElementById("game-music");
     this.endMusic = document.getElementById("end-music");
+
+    ////// else
     this.gameText = document.getElementById("game-container");
     this.statsText = document.getElementById("stats");
     this.scorePosition = document.getElementById("score");
@@ -35,12 +39,6 @@ class Game {
   }
 
   start() {
-    // console.log(`gamestarrrtt!!!`);
-
-    // this.startMusic.pause();
-    // this.endMusic.pause();
-    // this.gameMusic.play();
-
     const renderHighScoreInGame = this.storedHighScore
       ? this.storedHighScore
       : 0;
@@ -87,6 +85,9 @@ class Game {
     this.checkPlayerCollision();
     this.checkIfEnemyExploded();
     this.checkPlayerEnemyCollision();
+    this.enemies.forEach((enemy) => {
+      enemy.checkDead();
+    });
   }
 
   startEnemySpawning() {
@@ -127,20 +128,14 @@ class Game {
     }, 2000);
 
     this.enemies.push(newEnemy);
-    console.log("New enemy added:", newEnemy);
   }
 
   endGame() {
+    // Ensure endGame is called only once
+
     if (this.gameIsOver) {
       return;
     }
-    // Ensure endGame is called only once
-
-    console.log("game over");
-
-    // this.endMusic.play();
-    // this.gameMusic.pause();
-    // this.startMusic.pause();
 
     this.gameIsOver = true;
 
@@ -185,11 +180,6 @@ class Game {
     this.scorePosition.innerText = `${this.score}`;
     this.initScore.innerText = ` ${this.score}`;
 
-    // if (this.score > this.highScore) {
-    //   this.highScore = this.score;
-    //   localStorage.setItem('highScore', this.highScore);
-    // }
-
     if (this.score > this.storedHighScore) {
       localStorage.setItem("highScore", this.score);
       this.highScorePosition.innerText = this.score;
@@ -205,15 +195,14 @@ class Game {
         this.enemies.splice(i, 1);
         i--; // Adjust the index after removal to avoid skipping the next enemy
         this.updateScore();
-        const audio = new Audio("audio/defuse.mp3");
-        audio.play();
+        enemy.enemyDied = true;
+        window.sound.defuseAudio.play();
+
+        enemy.checkDead();
       } else {
         this.checkPlayerEnemyCollision(enemy); // Pass the enemy object
       }
     }
-    this.enemies.forEach((enemy) => {
-      enemy.stopExplosionAudio();
-    });
   }
 
   checkPlayerEnemyCollision(enemy) {
@@ -222,8 +211,7 @@ class Game {
       setTimeout(() => {
         this.endGame();
       }, 500); // Match the duration of the explode animation
-      const audio = new Audio("audio/player-die.mp3");
-      audio.play();
+      window.sound.playerDieAudio.play();
     }
   }
 
@@ -249,8 +237,7 @@ class Game {
       setTimeout(() => {
         this.endGame();
       }, 500); // Match the duration of the explode animation
-      const audio = new Audio("audio/player-die.mp3");
-      audio.play();
+      window.sound.playerDieAudio.play();
     }
   }
 

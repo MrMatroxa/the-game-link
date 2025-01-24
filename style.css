@@ -1,7 +1,11 @@
 html {
-  width: 100%; /* Ensure the html takes the full width */
-  height: 100%; /* Ensure the html takes the full height */
+  width: 100vw; /* Ensure the html takes the full width */
+  height: 100vh; /* Ensure the html takes the full height */
   position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 body {
@@ -155,18 +159,6 @@ main {
   color: #8a2be2;
 }
 
-/* @keyframes slide {
-  0% {
-    background-position: 0 -1000px;
-  }
-  95% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 50px;
-  }
-} */
-
 #game-end {
   display: none;
 }
@@ -275,10 +267,10 @@ body button {
 
 #music-parent {
   position: absolute;
-  width: 8%; /* Set a specific width for the container */
-  height: 8%; /* Set a specific height for the container */
-  top: 600px;
-  right: 20px;
+  width: 16%; /* Set a specific width for the container */
+  height: 16%; /* Set a specific height for the container */
+  top: 570px;
+  right: -10px;
 }
 
 #music-on,
@@ -286,8 +278,26 @@ body button {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Ensure the images take up the full width of the container */
+  width: 50%; /* Ensure the images take up the full width of the container */
   height: auto; /* Ensure the images take up the full height of the container */
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
 }
 
+#sfx {
+  position: absolute;
+  color: #8a2be2;
+  background: none;
+  margin: 0;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  left: 0;
+  top: 25%;
+  cursor: pointer;
+  text-decoration: line-through;
+}
+
+#sfx:focus,
+#sfx:active {
+  outline: none;
+}

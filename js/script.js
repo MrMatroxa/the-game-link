@@ -13,16 +13,21 @@ const musicOnIcon = document.getElementById("music-on");
 // music off
 const musicOffIcon = document.getElementById("music-off");
 
+const sfxIcon = document.getElementById("sfx");
+let sfxVolume = 0;
+
 function playMusic(music) {
   music.currentTime = 0;
   music.play();
 }
 
 function stopAllMusic() {
-  console.log("stop all music");
   stopMusic(startMusic);
   stopMusic(gameMusic);
   stopMusic(endMusic);
+  startMusic.currentTime = 0;
+  gameMusic.currentTime = 0;
+  endMusic.currentTime = 0;
 }
 
 function stopMusic(music) {
@@ -35,7 +40,7 @@ musicOnIcon.addEventListener("click", function () {
   musicOnIcon.style.display = "none";
   musicOffIcon.style.display = "block";
   isMusicOn = false;
-  console.log(`the music is off`, isMusicOn);
+
   stopAllMusic();
 });
 
@@ -43,17 +48,15 @@ musicOffIcon.addEventListener("click", function () {
   musicOnIcon.style.display = "block";
   musicOffIcon.style.display = "none";
   isMusicOn = true;
-  console.log(`the music is on`, isMusicOn);
+
   playCurrentMusic();
 });
 
 function playCurrentMusic() {
   if (window.getComputedStyle(startScreen).display === "block") {
-    console.log("play music");
     playMusic(startMusic);
   }
   if (window.getComputedStyle(gameScreen).display === "block") {
-    console.log("play game music");
     playMusic(gameMusic);
   }
   if (window.getComputedStyle(gameEndScreen).display === "block") {
@@ -63,18 +66,12 @@ function playCurrentMusic() {
 
 window.onload = function () {
   startScreen.style.display === "block";
-
   gameScreen.style.display === "none";
   gameEndScreen.style.display === "none";
-  // run
-  // playMusic(startMusic);
-  // // stop
-  // stopMusic(gameMusic);
-  // stopMusic(endMusic);
 
   const restartButton = document.getElementById("restart-button");
   const menuButton = document.getElementById("menu-button");
-  // ====== High Score
+  // ====== High Score =========
   const storedHighScore = localStorage.getItem("highScore");
   const renderHighScoreUI = storedHighScore ? storedHighScore : 0;
   const initialHighScoreUI = document.getElementById("init-high-score");
@@ -84,12 +81,12 @@ window.onload = function () {
   } else {
     localStorage.setItem("highScore", 0);
   }
-  // ======
 
   // ========================
   let game;
   startButton.onclick = () => {
     startGame();
+    window.sound.startAudio.play();
   };
   restartButton.onclick = () => {
     startGame();
@@ -108,7 +105,6 @@ window.onload = function () {
   };
 
   function startGame() {
-    console.log("start game");
     game = new Game();
     game.start();
   }
@@ -179,4 +175,6 @@ window.onload = function () {
       }
     }
   }
+
+  window.sound.sfxToggle();
 };

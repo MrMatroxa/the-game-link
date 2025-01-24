@@ -5,7 +5,7 @@ class Line {
     this.segmentWidth = segmentWidth;
     this.segmentHeight = segmentHeight;
     this.segments = [];
-    this.maxLength = 300;
+    this.maxLength = 250;
 
     for (let i = 0; i < segmentCount; i++) {
       const segment = new LineSegment(
@@ -62,8 +62,8 @@ class Line {
       return false;
     }
     for (const segment of this.segments) {
-
-      if (!enemy || !enemy.element) {   //checks if enemy exists
+      if (!enemy || !enemy.element) {
+        //checks if enemy exists
         return false;
       }
       const segmentRect = segment.getBoundingClientRect();
@@ -92,5 +92,4 @@ class Line {
       segment.element.style.opacity = "0"; // Change opacity
     }
   }
-
 }

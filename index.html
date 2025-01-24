@@ -9,7 +9,6 @@
   </head>
   <body>
     <main>
-      <!-- #game-intro is initially shown on the game start screen -->
       <div id="game-intro">
         <div id="logo">
           <img src="images/L.gif" alt="L" id="L" />
@@ -55,7 +54,6 @@
         </div>
       </div>
 
-      <!-- #game-end is initially hidden using CSS style display: none -->
       <div id="game-end">
         <img src="#" alt="" class="logo-img" />
         <h1>Pwned!</h1>
@@ -79,11 +77,13 @@
           class="music"
           id="music-off"
         />
+        <button id="sfx">SFX</button>
       </div>
     </main>
     <audio id="start-music" src="audio/menu.mp3" loop></audio>
     <audio id="game-music" src="audio/game-music.mp3" loop></audio>
     <audio id="end-music" src="audio/pwned.mp3" loop></audio>
+    <script type="text/javascript" src="js/audio.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/players.js"></script>

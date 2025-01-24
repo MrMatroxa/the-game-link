@@ -26,11 +26,6 @@ class Enemy {
     this.loadingElement.style.left = `${this.left}px`;
     this.loadingElement.style.top = `${this.top}px`;
     this.gameScreen.appendChild(this.loadingElement);
-
-    // Simulate loading time before spawning the actual enemy
-    // setTimeout(() => {
-    //   this.spawnEnemy();
-    // }, 2000); // Adjust the loading time as needed
   }
 
   spawnEnemy() {
@@ -45,11 +40,10 @@ class Enemy {
     this.element.style.height = `${this.height}px`; // Apply height
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
-    //this.element.classList.add('pulsate'); // Add pulsate animation
+    this.enemyDied = false;
     this.gameScreen.appendChild(this.element);
     this.updatePosition();
     this.pulsate();
-    // this.pulsate2();
     this.playExplosionAudio();
     this.checkDead();
   }
@@ -83,39 +77,19 @@ class Enemy {
   }
 
   playExplosionAudio() {
-    this.explosionAudio.play();
+    window.sound.explosionTimerAudio.play();
   }
 
   stopExplosionAudio() {
-    this.explosionAudio.pause();
-    this.explosionAudio.currentTime = 0;
+    window.sound.explosionTimerAudio.pause();
+    window.sound.explosionTimerAudio.currentTime = 0;
   }
 
   checkDead() {
     if (this.enemyDied) {
-      console.log("Enemy died");
       this.stopExplosionAudio();
     }
   }
-
-  // endGameExplode() {
-  //   if (this.element) {
-  //     this.element.classList.remove("pulsate2");
-  //     this.element.classList.add("explode");
-  //     setTimeout(() => {
-  //       this.element.remove();
-  //       //this.game.endGame(); // Trigger end game
-  //     }, 500); // Match the duration of the explode animation
-  //   }
-  // }
-  // pulsate2() {
-  //   setTimeout(() => {
-  //     if (this.element) {
-  //       this.element.classList.remove('pulsate');
-  //       this.element.classList.add('pulsate2');
-  //     }
-  //   }, 4000); // Adjust the pulsate interval
-  // }
 
   explode() {
     if (this.element) {

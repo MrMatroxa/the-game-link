@@ -1,8 +1,5 @@
 class Player {
   constructor(gameScreen, left, top, width, height) {
-    if (!gameScreen) {
-      throw new Error("gameScreen element not found"); // Added error handling for null gameScreen
-    }
     this.gameScreen = gameScreen;
     this.left = left;
     this.top = top;
@@ -54,7 +51,7 @@ class Player {
 
   didCollide(enemy) {
     if (!enemy || !enemy.element) {
-      // checks if eneies exist
+      // checks if enemies exist
       return false;
     }
 
