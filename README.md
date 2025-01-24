@@ -62,9 +62,10 @@
 3. Implement collision detection between player and enemies.
 4. Add sound effects for game events.
 5. Implement score tracking and display.
-6. Create game over screen with restart option.
-7. Polish game visuals and animations.
-8. Test and debug the game.
+6. Create a start screen.
+7. Create game over screen with restart option.
+8. Polish game visuals and animations.
+9. Test and debug the game.
 
 ## Links
 
